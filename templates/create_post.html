@@ -1,0 +1,89 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Create Post
+{% endblock %}
+
+{% block main %}
+    <h1 class="mb-4">Create New Post</h1>
+    <form action="/create" method="post">
+        <div class="mb-3">
+            <label for="postTitle" class="form-label">Post Title</label>
+            <input type="text" class="form-control" id="postTitle" name="title"
+                   placeholder="Enter your post title" required
+                   maxlength="100"> {# Added maxlength for title #}
+            <div class="form-text">
+                <span id="titleCharCount">0</span>/100 characters
+            </div>
+        </div>
+        <div class="mb-3">
+            <label for="postContent" class="form-label">Post Content</label>
+            <textarea class="form-control" id="postContent" name="content" rows="6"
+                      placeholder="Write your post content here..." required
+                      maxlength="1000"></textarea> {# Added maxlength for content #}
+            <div class="form-text">
+                <span id="contentCharCount">0</span>/1000 characters (max 150 words)
+                {# Retained word count info for clarity #}
+                <span class="ms-3" id="wordCountDisplay">0/150 words</span>
+            </div>
+        </div>
+        <button type="submit" class="btn btn-primary">Publish Post</button>
+    </form>
+{% endblock %}
+
+{% block scripts %}
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // --- Title Character Counter ---
+            const titleInput = document.getElementById('postTitle');
+            const titleCharCountSpan = document.getElementById('titleCharCount');
+            const maxTitleChars = parseInt(titleInput.getAttribute('maxlength'));
+
+            function updateTitleCharCount() {
+                const currentChars = titleInput.value.length;
+                titleCharCountSpan.textContent = currentChars;
+            }
+
+            titleInput.addEventListener('input', updateTitleCharCount);
+            updateTitleCharCount(); // Initial count
+
+            // --- Content Character and Word Counter ---
+            const contentTextarea = document.getElementById('postContent');
+            const contentCharCountSpan = document.getElementById('contentCharCount');
+            const wordCountDisplaySpan = document.getElementById('wordCountDisplay');
+            const maxContentChars = parseInt(contentTextarea.getAttribute('maxlength'));
+            const maxContentWords = 150; // Your existing word limit
+
+            function updateContentCounters() {
+                const text = contentTextarea.value;
+                const trimmedText = text.trim();
+
+                // Character count
+                const currentChars = text.length;
+                contentCharCountSpan.textContent = currentChars;
+
+                // Word count (only for display, truncation handled by maxlength/server)
+                const words = trimmedText === '' ? [] : trimmedText.split(/\s+/);
+                let currentWords = words.length;
+
+                // Client-side word limit warning/truncation (optional but good UX)
+                // The HTML maxlength handles character truncation directly.
+                // For words, we'll just display and rely on server-side for hard limit.
+                if (currentWords > maxContentWords) {
+                    // This specific JavaScript truncation for words
+                    // might conflict with maxlength or just display a warning.
+                    // For character limits, maxlength is primary.
+                    // Let's make it just a visual warning if words exceed.
+                    wordCountDisplaySpan.style.color = 'red';
+                } else {
+                    wordCountDisplaySpan.style.color = 'inherit';
+                }
+                wordCountDisplaySpan.textContent = `${currentWords}/${maxContentWords} words`;
+
+            }
+
+            contentTextarea.addEventListener('input', updateContentCounters);
+            updateContentCounters(); // Initial count
+        });
+    </script>
+{% endblock %}

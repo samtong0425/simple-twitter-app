@@ -1,0 +1,32 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Homepage
+{% endblock %}
+
+{% block main %}
+    <h1 class="mb-4">Recent Posts</h1>
+
+    {% if posts %}
+        <div class="row">
+            {% for post in posts %}
+                <div class="col-md-8 offset-md-2 mb-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ post.title }}</h5>
+                            <p class="card-text">{{ post.content }}</p>
+                            <p class="card-subtitle mb-2 text-muted small">
+                                Posted by {{ post.username }} on {{ post.timestamp }}
+                            </p>
+                            {# Optional: Link to a single post view if you create one later #}
+                            {# <a href="#" class="btn btn-sm btn-outline-primary">Read More</a> #}
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <p class="text-center">No posts yet. Be the first to <a href="/create">create one</a>!</p>
+    {% endif %}
+
+{% endblock %}
