@@ -23,7 +23,6 @@
                       maxlength="1000"></textarea> {# Added maxlength for content #}
             <div class="form-text">
                 <span id="contentCharCount">0</span>/1000 characters (max 150 words)
-                {# Retained word count info for clarity #}
                 <span class="ms-3" id="wordCountDisplay">0/150 words</span>
             </div>
         </div>
@@ -32,6 +31,7 @@
 {% endblock %}
 
 {% block scripts %}
+    {{ super() }} 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const titleInput = document.getElementById('postTitle');
@@ -51,7 +51,7 @@
             const wordCountDisplaySpan = document.getElementById('wordCountDisplay');
             const maxContentChars = parseInt(contentTextarea.getAttribute('maxlength'));
             const maxContentWords = 150;
-            
+
             function updateContentCounters() {
                 const text = contentTextarea.value;
                 const trimmedText = text.trim();
@@ -72,7 +72,7 @@
             }
 
             contentTextarea.addEventListener('input', updateContentCounters);
-            updateContentCounters(); // Initial count
+            updateContentCounters();
         });
     </script>
 {% endblock %}

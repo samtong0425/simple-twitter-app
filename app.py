@@ -200,22 +200,22 @@ def create_post():
 
         if not title:
             flash("Post title cannot be empty.")
-            return redirect("/create")
+            return render_template("create_post.html", title=title, content=content)
         if len(title) > MAX_TITLE_CHARS:
             flash(f"Post title exceeds {MAX_TITLE_CHARS} characters.")
-            return redirect("/create")
+            return render_template("create_post.html", title=title, content=content)
 
         if not content:
             flash("Post content cannot be empty.")
-            return redirect("/create")
+            return render_template("create_post.html", title=title, content=content)
         if len(content) > MAX_CONTENT_CHARS:
             flash(f"Post content exceeds {MAX_CONTENT_CHARS} characters.")
-            return redirect("/create")
+            return render_template("create_post.html", title=title, content=content)
 
         content_words = content.strip().split() if content.strip() else []
         if len(content_words) > MAX_CONTENT_WORDS:
             flash(f"Post content exceeds {MAX_CONTENT_WORDS} words.")
-            return redirect("/create")
+            return render_template("create_post.html", title=title, content=content)
 
         user_id = session["user_id"]
         conn = get_db_connection()
