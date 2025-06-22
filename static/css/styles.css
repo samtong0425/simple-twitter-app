@@ -1,0 +1,117 @@
+:root {
+    /* Light Mode Theme */
+    --primary-light: #916cad;   /* Light Purple */
+    --primary-dark: #523874;    /* Dark Purple */
+    --secondary-light: #c7fba5; /* Light Green */
+    --secondary-dark: #adf182;  /* Darker Green */
+
+    --bg-color: #fdfcff;        /* A very light, almost white background */
+    --text-color: #212529;      /* Standard dark text */
+    --card-bg: #ffffff;
+    --card-border: #e0e0e0;
+    --text-on-dark-bg: #ffffff; /* White text for dark purple backgrounds */
+    --btn-hover-text-color: #ffffff;
+}
+
+[data-bs-theme="dark"] {
+    /* Dark Mode Theme*/
+    --primary-light: #916cad;
+    --primary-dark: #c7fba5;    /* Use the light green as the "brighter" accent in dark mode */
+    --secondary-light: #adf182;
+
+    --bg-color: #1a1124;        /* A very dark, deep purple background */
+    --text-color: #e2e2e2;      /* Light grey text for readability */
+    --card-bg: #2c1d3e;         /* A slightly lighter purple for cards */
+    --card-border: #523874;
+    --text-on-dark-bg: #ffffff;
+    --btn-hover-text-color: #1a1124;
+}
+
+/* Apply base background and text colors */
+body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    transition: background-color 0.3s ease, color 0.3s ease; /* Smooth transition */
+}
+
+/* Navbar Styling */
+.navbar {
+    background-color: var(--card-bg) !important; /* Use card-bg for navbar background */
+    border-bottom: 1px solid var(--card-border);
+}
+
+.navbar-brand,
+.navbar-nav .nav-link {
+    color: var(--text-color) !important;
+}
+
+.navbar-brand:hover,
+.navbar-nav .nav-link:hover {
+    color: var(--primary-dark) !important;
+}
+
+
+/* Button Styling (example) */
+.btn-primary {
+    background-color: var(--primary-dark);
+    border-color: var(--primary-dark);
+    color: var(--text-on-dark-bg); /* Text on dark button */
+}
+
+.btn-primary:hover {
+    background-color: var(--primary-light);
+    border-color: var(--primary-light);
+    color: var(--btn-hover-text-color);
+}
+
+.btn-outline-primary {
+    color: var(--primary-dark);
+    border-color: var(--primary-dark);
+}
+
+.btn-outline-primary:hover {
+    background-color: var(--primary-dark);
+    color: var(--text-on-dark-bg);
+}
+
+/* Card Styling (for posts) */
+.card {
+    background-color: var(--card-bg);
+    border: 1px solid var(--card-border);
+    color: var(--text-color);
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+.card-title {
+    color: var(--primary-dark); /* Make titles stand out */
+}
+
+.card-subtitle {
+    color: var(--text-color) !important; /* Ensure muted text is visible in dark mode */
+}
+
+
+/* Alert Styling */
+.alert {
+    --bs-alert-bg: var(--secondary-light); /* Example: using secondary color for alerts */
+    --bs-alert-color: var(--primary-dark);
+    --bs-alert-border-color: var(--secondary-dark);
+}
+
+/* You might want to adjust specific Bootstrap components if they don't look right */
+/* For example, for input fields if they don't pick up text-color */
+.form-control {
+    background-color: var(--card-bg);
+    color: var(--text-color);
+    border-color: var(--card-border);
+}
+
+.form-control:focus {
+    border-color: var(--primary-light);
+    box-shadow: 0 0 0 0.25rem rgba(var(--primary-light-rgb), 0.25); /* Not perfect, requires a bit more work */
+}
+
+/* For form-text */
+.form-text {
+    color: var(--text-color); /* Ensure help text is visible */
+}

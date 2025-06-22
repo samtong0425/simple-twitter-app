@@ -4,8 +4,10 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/styles.css') }}" rel="stylesheet">
     <title>{% block title %}Simple Twitter{% endblock %}</title>
     <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
   </head>
 
   <body class="p-3">
@@ -16,6 +18,14 @@
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav me-auto">
+            {# Dark Mode Toggle Button #}
+            <li class="nav-item">
+                <button class="btn btn-sm btn-outline-secondary" id="theme-toggle">
+                    <i class="bi bi-sun-fill" id="theme-icon"></i> <span id="theme-text">Light Mode</span>
+                </button>
+            </li>
+          </ul>
           <ul class="navbar-nav ms-auto">
             {% if session.user_id %}
             <li class="nav-item">
@@ -50,11 +60,52 @@
 
     <main class="container py-5 text-center">
         {% block main %}
-        
+
         {% endblock %}
     </main>
 
-    {% block scripts %}{% endblock %}
+    {# This block is for page-specific scripts #}
+    {% block scripts %}
+        {# This is where your theme toggle JS will go for layout-level scripts #}
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                const themeToggle = document.getElementById('theme-toggle');
+                const themeIcon = document.getElementById('theme-icon');
+                const themeText = document.getElementById('theme-text');
+                const body = document.body; // Target the body directly for data-bs-theme
+
+                // Load saved theme from localStorage, or default to light
+                let currentTheme = localStorage.getItem('theme') || 'light';
+                body.setAttribute('data-bs-theme', currentTheme);
+                updateToggleButton(currentTheme); // Set initial state of button
+
+                themeToggle.addEventListener('click', function() {
+                    // Check the current theme attribute on the body
+                    if (body.getAttribute('data-bs-theme') === 'dark') {
+                        body.setAttribute('data-bs-theme', 'light');
+                        localStorage.setItem('theme', 'light');
+                        updateToggleButton('light');
+                    } else {
+                        body.setAttribute('data-bs-theme', 'dark');
+                        localStorage.setItem('theme', 'dark');
+                        updateToggleButton('dark');
+                    }
+                });
+
+                function updateToggleButton(theme) {
+                    if (theme === 'dark') {
+                        themeIcon.classList.remove('bi-sun-fill');
+                        themeIcon.classList.add('bi-moon-stars-fill');
+                        themeText.textContent = 'Dark Mode';
+                    } else {
+                        themeIcon.classList.remove('bi-moon-stars-fill');
+                        themeIcon.classList.add('bi-sun-fill');
+                        themeText.textContent = 'Light Mode';
+                    }
+                }
+            });
+        </script>
+    {% endblock %}
 
   </body>
 </html>

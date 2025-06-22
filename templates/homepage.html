@@ -1,25 +1,23 @@
-{% extends "layout.html" %}
+{% extends "layout.html" %} {# Only one of these! #}
 
 {% block title %}
     Homepage
 {% endblock %}
 
 {% block main %}
-    <h1 class="mb-4">Recent Posts</h1>
+    <h1 class="mb-4 text-center page-title">Recent Posts</h1> {# Added page-title class #}
 
     {% if posts %}
-        <div class="row">
+        <div class="row w-100 justify-content-center"> {# Added w-100 and justify-content-center #}
             {% for post in posts %}
-                <div class="col-md-8 offset-md-2 mb-4">
-                    <div class="card">
+                <div class="col-md-8 mb-4"> {# Removed offset-md-2, relying on justify-content-center #}
+                    <div class="card my-card-style"> {# Added my-card-style #}
                         <div class="card-body">
                             <h5 class="card-title">{{ post.title }}</h5>
                             <p class="card-text">{{ post.content }}</p>
                             <p class="card-subtitle mb-2 text-muted small">
                                 Posted by {{ post.username }} on {{ post.timestamp }}
                             </p>
-                            {# Optional: Link to a single post view if you create one later #}
-                            {# <a href="#" class="btn btn-sm btn-outline-primary">Read More</a> #}
                         </div>
                     </div>
                 </div>
