@@ -11,7 +11,7 @@
             <label for="postTitle" class="form-label">Post Title</label>
             <input type="text" class="form-control" id="postTitle" name="title"
                    placeholder="Enter your post title" required
-                   maxlength="100"> {# Added maxlength for title #}
+                   maxlength="100">
             <div class="form-text">
                 <span id="titleCharCount">0</span>/100 characters
             </div>
@@ -44,14 +44,14 @@
             }
 
             titleInput.addEventListener('input', updateTitleCharCount);
-            updateTitleCharCount(); // Initial count
+            updateTitleCharCount();
 
             const contentTextarea = document.getElementById('postContent');
             const contentCharCountSpan = document.getElementById('contentCharCount');
             const wordCountDisplaySpan = document.getElementById('wordCountDisplay');
             const maxContentChars = parseInt(contentTextarea.getAttribute('maxlength'));
-            const maxContentWords = 150; // Your existing word limit
-
+            const maxContentWords = 150;
+            
             function updateContentCounters() {
                 const text = contentTextarea.value;
                 const trimmedText = text.trim();
