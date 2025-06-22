@@ -34,7 +34,6 @@
 {% block scripts %}
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            // --- Title Character Counter ---
             const titleInput = document.getElementById('postTitle');
             const titleCharCountSpan = document.getElementById('titleCharCount');
             const maxTitleChars = parseInt(titleInput.getAttribute('maxlength'));
@@ -47,7 +46,6 @@
             titleInput.addEventListener('input', updateTitleCharCount);
             updateTitleCharCount(); // Initial count
 
-            // --- Content Character and Word Counter ---
             const contentTextarea = document.getElementById('postContent');
             const contentCharCountSpan = document.getElementById('contentCharCount');
             const wordCountDisplaySpan = document.getElementById('wordCountDisplay');
@@ -58,22 +56,13 @@
                 const text = contentTextarea.value;
                 const trimmedText = text.trim();
 
-                // Character count
                 const currentChars = text.length;
                 contentCharCountSpan.textContent = currentChars;
 
-                // Word count (only for display, truncation handled by maxlength/server)
                 const words = trimmedText === '' ? [] : trimmedText.split(/\s+/);
                 let currentWords = words.length;
 
-                // Client-side word limit warning/truncation (optional but good UX)
-                // The HTML maxlength handles character truncation directly.
-                // For words, we'll just display and rely on server-side for hard limit.
                 if (currentWords > maxContentWords) {
-                    // This specific JavaScript truncation for words
-                    // might conflict with maxlength or just display a warning.
-                    // For character limits, maxlength is primary.
-                    // Let's make it just a visual warning if words exceed.
                     wordCountDisplaySpan.style.color = 'red';
                 } else {
                     wordCountDisplaySpan.style.color = 'inherit';

@@ -15,7 +15,6 @@ app.config["SESSION_TYPE"] = "filesystem"
 
 DATABASE_NAME = "main.db"
 
-# --- DATABASE FUNCTIONS (MOVE THESE UP!) ---
 def get_db_connection():
     """Returns a database connection."""
     conn = sqlite3.connect(DATABASE_NAME)
@@ -50,16 +49,13 @@ def init_db():
 
     conn.commit()
     conn.close()
-# --- END DATABASE FUNCTIONS ---
 
 
-# --- CALL init_db() AFTER ITS DEFINITION ---
 with app.app_context():
     init_db()
-# --- END CALL init_db() ---
 
 
-Session(app) # Initialize Flask-Session AFTER the app context and db init
+Session(app)
 
 
 def login_required(f):
