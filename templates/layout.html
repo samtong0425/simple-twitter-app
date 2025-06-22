@@ -72,15 +72,13 @@
                 const themeToggle = document.getElementById('theme-toggle');
                 const themeIcon = document.getElementById('theme-icon');
                 const themeText = document.getElementById('theme-text');
-                const body = document.body; // Target the body directly for data-bs-theme
+                const body = document.body;
 
-                // Load saved theme from localStorage, or default to light
                 let currentTheme = localStorage.getItem('theme') || 'light';
                 body.setAttribute('data-bs-theme', currentTheme);
-                updateToggleButton(currentTheme); // Set initial state of button
+                updateToggleButton(currentTheme);
 
                 themeToggle.addEventListener('click', function() {
-                    // Check the current theme attribute on the body
                     if (body.getAttribute('data-bs-theme') === 'dark') {
                         body.setAttribute('data-bs-theme', 'light');
                         localStorage.setItem('theme', 'light');
