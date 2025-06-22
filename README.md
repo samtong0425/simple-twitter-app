@@ -1,5 +1,7 @@
 # Simple Twitter
 
+<img width="1292" alt="image" src="https://github.com/user-attachments/assets/18aa4b87-7a2a-422c-a559-c9880e893524" />
+
 #### Video Demo:  <https://youtu.be/your_video_id_here>
 #### Description:
 
