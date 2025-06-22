@@ -15,11 +15,13 @@ app.config["SESSION_TYPE"] = "filesystem"
 
 DATABASE_NAME = "main.db"
 
+
 def get_db_connection():
     """Returns a database connection."""
     conn = sqlite3.connect(DATABASE_NAME)
     conn.row_factory = sqlite3.Row
     return conn
+
 
 def init_db():
     conn = get_db_connection()
@@ -219,7 +221,7 @@ def create_post():
         conn = get_db_connection()
         conn.execute(
             "INSERT INTO posts (user_id, title, content) VALUES (?, ?, ?)",
-            (user_id, title, content)
+            (user_id, title, content),
         )
         conn.commit()
         conn.close()
