@@ -2,7 +2,7 @@
 
 <img width="1292" alt="image" src="https://github.com/user-attachments/assets/18aa4b87-7a2a-422c-a559-c9880e893524" />
 
-#### Video Demo:  <https://youtu.be/your_video_id_here>
+#### Video Demo:  https://youtu.be/1PO6ELHfQoQ
 #### Description:
 
 Simple Twitter is a web application as my final project for CS50x. It is a minimalist clone of Twitter, focusing on the core functionality: user authentication, post creation, and a real-time global feed. The application is built from the ground up using Python and the Flask web framework on the backend, with a SQLite database for data persistence. The frontend is crafted with HTML, custom CSS, and the Bootstrap 5 framework to ensure a responsive, modern, and intuitive user interface.
